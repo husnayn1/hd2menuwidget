@@ -1,0 +1,322 @@
+/* Common styles for all social network widgets */
+.social-network-widget {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Animated Facebook App */
+.animated-facebook {
+  background-color: #000;
+  color: #fff;
+}
+
+.facebook-header {
+  background-color: #3b5998;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.facebook-logo {
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.facebook-content {
+  display: flex;
+  padding: 15px;
+  flex: 1;
+}
+
+.facebook-profile-image {
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  border-radius: 5px;
+  margin-right: 15px;
+}
+
+.facebook-profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.facebook-post-content {
+  flex: 1;
+}
+
+.facebook-post-name {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.facebook-post-description {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.facebook-footer {
+  padding: 10px;
+  background-color: #3b5998;
+  display: flex;
+  justify-content: center;
+}
+
+.facebook-icon {
+  color: white;
+  font-size: 14px;
+}
+
+/* Facebook Modern */
+.facebook-modern {
+  background-color: #fff;
+  color: #333;
+}
+
+.data-feed-banner {
+  background-color: #4267B2;
+  color: white;
+  padding: 8px 15px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.facebook-modern-content {
+  display: flex;
+  padding: 20px;
+  flex: 1;
+}
+
+.facebook-modern-text {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.facebook-modern-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.fb-logo-container {
+  width: 50px;
+  height: 50px;
+  background-color: #4267B2;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.fb-logo {
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.qr-code {
+  width: 100px;
+  height: 100px;
+}
+
+/* Facebook Page */
+.facebook-page {
+  background-color: #fff;
+  color: #333;
+}
+
+.facebook-page-header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.facebook-page-logo {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.facebook-page-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.facebook-page-name {
+  font-size: 14px;
+  color: #4267B2;
+}
+
+.facebook-page-content {
+  padding: 15px;
+  flex: 1;
+}
+
+.facebook-page-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.facebook-page-image {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.facebook-page-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.facebook-page-description {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.facebook-page-date {
+  font-size: 12px;
+  color: #777;
+}
+
+/* Follow Us */
+.follow-us {
+  background-color: #1877f2;
+  color: #fff;
+}
+
+.follow-us-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  flex: 1;
+}
+
+.follow-us-platform {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.platform-logo {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  background-color: white;
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.platform-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.platform-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.follow-us-username {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.follow-us-qr {
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.follow-us-tabs {
+  display: flex;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 12px;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tab:last-child {
+  border-right: none;
+}
+
+.tab.active {
+  border-bottom: 3px solid white;
+  font-weight: bold;
+}
+
+/* Tagbox Display */
+.tagbox-display {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tagbox-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+/* Walls.io */
+.walls-io {
+  background-color: #1a1a1a;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.walls-io-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+/* YouTube Video */
+.youtube-video {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.youtube-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 20px;
+}
+
+.youtube-logo {
+  width: 120px;
+  height: 60px;
+}

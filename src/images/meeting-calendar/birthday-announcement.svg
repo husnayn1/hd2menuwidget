@@ -1,0 +1,14 @@
+<svg width="320" height="240" xmlns="http://www.w3.org/2000/svg">
+  <rect width="320" height="240" fill="#ffffff" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="20" y="40" font-family="Arial" font-size="24" fill="#1976d2" font-weight="bold">Upcoming Birthdays</text>
+  
+  <!-- Birthday Item 1 -->
+  <rect x="20" y="70" width="280" height="50" fill="#f8f9fa" stroke="#e9ecef" stroke-width="1" rx="8"/>
+  <text x="40" y="95" font-family="Arial" font-size="18" fill="#1976d2" font-weight="bold">Apr 10</text>
+  <text x="120" y="95" font-family="Arial" font-size="16" fill="#333333">John Smith</text>
+  
+  <!-- Birthday Item 2 -->
+  <rect x="20" y="130" width="280" height="50" fill="#f8f9fa" stroke="#e9ecef" stroke-width="1" rx="8"/>
+  <text x="40" y="155" font-family="Arial" font-size="18" fill="#1976d2" font-weight="bold">Apr 11</text>
+  <text x="120" y="155" font-family="Arial" font-size="16" fill="#333333">Emma Johnson</text>
+</svg>

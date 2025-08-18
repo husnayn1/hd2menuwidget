@@ -1,0 +1,18 @@
+<svg width="320" height="240" xmlns="http://www.w3.org/2000/svg">
+  <rect width="320" height="240" fill="#8B4513" stroke="#654321" stroke-width="2" rx="10"/>
+  <text x="20" y="50" font-family="Arial" font-size="28" fill="#FFD700" font-weight="bold">Today</text>
+  
+  <!-- Calendar Icon -->
+  <circle cx="280" cy="40" r="20" fill="#FFD700" stroke="#654321" stroke-width="2"/>
+  <text x="270" y="45" font-family="Arial" font-size="20" fill="#000000">📅</text>
+  
+  <!-- Event 1 -->
+  <rect x="20" y="80" width="280" height="50" fill="#654321" stroke="#8B4513" stroke-width="1" rx="8"/>
+  <text x="40" y="105" font-family="Arial" font-size="16" fill="#ffffff" font-weight="bold">Ongoing event</text>
+  <text x="40" y="125" font-family="Arial" font-size="14" fill="#ffffff">5:00 PM - 6:40 PM</text>
+  
+  <!-- Event 2 -->
+  <rect x="20" y="140" width="280" height="50" fill="#654321" stroke="#8B4513" stroke-width="1" rx="8"/>
+  <text x="40" y="165" font-family="Arial" font-size="16" fill="#ffffff" font-weight="bold">Next event</text>
+  <text x="40" y="185" font-family="Arial" font-size="14" fill="#ffffff">6:41 PM - 8:40 PM</text>
+</svg>
