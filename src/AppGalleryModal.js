@@ -9,6 +9,10 @@ import OfficeGallery from "./widgets/office/OfficeGallery.js";
 import OtherGallery from "./widgets/other/OtherGallery.js";
 import SportsGallery from "./widgets/sports/SportsGallery.js";
 import TextScrollerGallery from "./widgets/text-scrollers/textScrollerGallery.js";
+import WeatherGallery from "./widgets/weather/WeatherGallery.js";
+import WebMedia from "./widgets/web-media/Webmedia.js";
+import RetireMeida from "./widgets/retired-apps/RetiredMedia.js";
+import NewMedia from "./widgets/news-rss-feeds/NewsMedia.js";
 
 
 const galleryData = [
@@ -422,78 +426,78 @@ const galleryData = [
       {
         name: "Configurable News",
         description: "Customizable news feed with configurable sources.",
-        image: "https://via.placeholder.com/200x120?text=Configurable+News",
+        image: "https://cdn.pixabay.com/photo/2024/09/30/13/58/cactus-9085905_640.jpg",
         dataFeed: "Data Feed Enabled!",
         type: "news-feed"
       },
       {
         name: "Configurable RSS News",
         description: "RSS-based news feed with customizable sources.",
-        image: "https://via.placeholder.com/200x120?text=Configurable+RSS+News",
+        image: "https://cdn.pixabay.com/photo/2024/01/01/13/55/strong-8481378_640.jpg",
         type: "rss-feed"
       },
       {
         name: "Creative News Feed",
         description: "Visually appealing news feed with modern design.",
-        image: "https://via.placeholder.com/200x120?text=Creative+News+Feed",
+        image: "https://cdn.pixabay.com/photo/2024/09/27/20/10/pantheon-paris-9079834_640.jpg",
         dataFeed: "Data Feed Enabled!",
         type: "news-feed"
       },
       {
         name: "Creative RSS",
         description: "Stylish RSS feed with customizable appearance.",
-        image: "https://via.placeholder.com/200x120?text=Creative+RSS",
+        image: "https://cdn.pixabay.com/photo/2025/03/19/19/40/square-9481441_640.jpg",
         type: "rss-feed"
       },
       {
         name: "Cycling Media RSS",
         description: "RSS feed focused on cycling and sports news.",
-        image: "https://via.placeholder.com/200x120?text=Cycling+Media+RSS",
+        image: "https://cdn.pixabay.com/photo/2018/01/28/10/59/internet-3113279_640.jpg",
         type: "rss-feed"
       },
       {
         name: "Flexible News Ticker",
         description: "Scrolling news ticker for important updates.",
-        image: "https://via.placeholder.com/200x120?text=Flexible+News+Ticker",
+        image: "https://cdn.pixabay.com/photo/2024/02/18/18/54/retro-8581825_640.jpg",
         type: "news-ticker"
       },
       {
         name: "Media RSS",
         description: "Media-rich RSS feed with images and videos.",
-        image: "https://via.placeholder.com/200x120?text=Media+RSS",
+        image: "https://cdn.pixabay.com/photo/2014/03/22/22/15/social-media-292988_640.jpg",
         type: "rss-feed"
       },
       {
         name: "Modern News",
         description: "Contemporary news feed with sleek design.",
-        image: "https://via.placeholder.com/200x120?text=Modern+News",
+        image: "https://cdn.pixabay.com/photo/2020/05/18/16/17/social-media-5187243_640.png",
         dataFeed: "Data Feed Enabled!",
         type: "news-feed"
       },
       {
         name: "Modern RSS",
         description: "Modern RSS feed with clean interface.",
-        image: "https://via.placeholder.com/200x120?text=Modern+RSS",
+        image: "https://cdn.pixabay.com/photo/2016/01/20/11/54/book-wall-1151405_640.jpg",
         type: "rss-feed"
       },
       {
         name: "News Circle",
         description: "Circular news display with rotating headlines.",
-        image: "https://via.placeholder.com/200x120?text=News+Circle",
+        image: "https://cdn.pixabay.com/photo/2023/06/28/08/13/public-speaking-8093767_640.png",
         dataFeed: "Data Feed Enabled!",
         type: "news-feed"
       },
       {
         name: "News Feed 1",
         description: "Standard news feed with latest headlines.",
-        image: "https://via.placeholder.com/200x120?text=News+Feed+1",
+        image: "https://cdn.pixabay.com/photo/2021/01/04/23/12/world-trade-center-5889199_640.jpg",
         dataFeed: "Data Feed Enabled!",
         type: "news-feed"
       },
       {
         name: "News Feed 3",
         description: "Alternative news feed layout with featured stories.",
-        image: "https://via.placeholder.com/200x120?text=News+Feed+3",
+        image: "https://cdn.pixabay.com/photo/2020/05/24/06/54/dumbo-5212670_640.jpg",
         dataFeed: "Data Feed Enabled!",
         type: "news-feed"
       }
@@ -789,21 +793,36 @@ cards: [
   },
   {
     category: "Web & Media",
-    cards: [
-      {
-        name: "Web Media App",
-        description: "Web and media content display.",
-        image: "https://via.placeholder.com/200x120?text=Web+Media+App"
-      }
-    ]
+  cards: [
+    {
+      name: "Media Cycling App",
+      description: "Cycle through media content.",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5g0C2d1zNjp1NXRArinryEP1kcZFeFmUDjA&s"
+    },
+    {
+      name: "Photos",
+      description: "Photo gallery display.",
+      image: "https://cdn.pixabay.com/photo/2021/08/31/10/34/boat-shed-6588414_640.jpg"
+    },
+    {
+      name: "Streaming Video Link",
+      description: "Stream video content.",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0N0clUor2WAHBXtDHro8BVDpLIPzhmV4WNg&s"
+    },
+    {
+      name: "Website Link",
+      description: "Direct website access.",
+      image: "https://cdn.pixabay.com/photo/2013/01/29/00/47/google-76517_1280.png"
+    }
+  ]
   },
   {
     category: "Retired Apps",
     cards: [
       {
-        name: "Retired App",
+        name: "Twitter Modern",
         description: "Discontinued applications.",
-        image: "https://via.placeholder.com/200x120?text=Retired+App"
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaHQriH0opvbpznIbGO7OTZ9qMOxfR1Y9sTQ&s"
       }
     ]
   }
@@ -949,8 +968,23 @@ function AppGalleryModal({ onClose, onWidgetSelect, selectedCategory, setSelecte
             <TextScrollerGallery cards={filteredCards} onWidgetSelect={onWidgetSelect} />
           )
           : 
-
-          
+          selectedCategory === 'Weather' ? (
+            <WeatherGallery cards={filteredCards} onWidgetSelect={onWidgetSelect} />
+          )
+          :  
+          selectedCategory === 'Web & Media' ? (
+            <WebMedia cards={filteredCards} onWidgetSelect={onWidgetSelect} />
+          )
+          :  
+          selectedCategory === 'Retired Apps' ? (
+            <RetireMeida cards={filteredCards} onWidgetSelect={onWidgetSelect} />
+          )
+          :
+          selectedCategory === 'News & RSS Feeds' ? (
+            <NewMedia cards={filteredCards} onWidgetSelect={onWidgetSelect} />
+          )
+          :
+                 
            selectedCategory === 'Other' ? (
             <OtherGallery cards={filteredCards} onWidgetSelect={onWidgetSelect} />
           )

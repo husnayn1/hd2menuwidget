@@ -21,6 +21,7 @@ import lightningImg from './images/lightning.jpg';
 import clocksImg from './images/clocks.png';
 import cloudsImg from './images/clouds.jpg';
 import './App.css';
+import MediaCards from "./components/widget-box/MediaCard.jsx";
 
 function Konva() {
   // Persist media in localStorage
@@ -216,6 +217,7 @@ function Konva() {
         }}>
           <TopBar onNewClick={handleNewClick} showDropdown={showDropdown} search={search} setSearch={setSearch}>
             <NewDropdown onAppClick={handleAppClick} onUploadClick={handleUploadClick} />
+
           </TopBar>
           <Routes>
             <Route path="/content" element={<ContentArea media={media} onRenameMedia={handleRenameMedia} onDeleteMedia={handleDeleteMedia} search={search} onEditWidget={handleEditWidget} />} />

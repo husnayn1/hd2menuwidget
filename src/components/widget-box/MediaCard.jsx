@@ -9,66 +9,51 @@ import {
   FaFileAlt 
 } from 'react-icons/fa';
 
-const MediaCards = () => {
+const MediaCards = ({ onAppClick, onUploadClick }) => {
 
-  const baseURL = "https://dev.app.hd2.menu";
 
 const cardData = [
   {
     icon: FaCloudUploadAlt,
     title: "Upload",
-    route: `${baseURL}/admin/admin_files/display/view/grid_view/all`
+    
   },
   {
     icon: FaRocket,
-    title: "Layout",
-    route: `${baseURL}/admin/layouts`
+    title: "App",
+    
   },
   {
     icon: FaDesktop,
-    title: "Device",
-    route: `${baseURL}/admin/devices/create`
+    title: "Campaign",
+    
   },
   {
     icon: FaFolder,
-    title: "Groups",
-    route: `${baseURL}/admin/groups`
+    title: "Composition",
+    
   },
   {
     icon: FaPollH,
-    title: "Composition",
-    route: `https://hd2.dev.app.hd2.menu/`,
-    external: true
+    title: "Data Feed",    
   },
   {
     icon: FaLayerGroup,
-    title: "Playlist",
-    route: `${baseURL}/admin/playlists/create`
+    title: "Folder",
+    
   },
   {
     icon: FaBullseye,
-    title: "Campaign",
-    route: `https://hd2.dev.app.hd2.menu/`,
-    external: true
+    title: "Playlist",
   },
   {
     icon: FaFileAlt,
-    title: "Template",
-    route: `${baseURL}/admin/templates`
+    title: "Audio Playlist",    
   }
 ];
 
 
   const handleCardClick = (route, external = false) => {
-    if (external) {
-      window.open(route, '_blank');
-    } else {
-      // For internal routes, you can use your routing solution
-      // For example, if using React Router:
-      // navigate(route);
-      // For now, using window.location for demonstration
-      window.location.href = route;
-    }
   };
 
   return (
@@ -81,26 +66,29 @@ const cardData = [
   key={index}
   style={{
     ...styles.mediaCard,
-    backgroundColor: card.title === "Campaign" ? "#ffe6e6" : "white",
-    border: card.title === "Campaign" ? "2px solid #d32f2f" : "none",
+    backgroundColor: card.title === "App" ? "#ffe6e6" : "white",
+    border: card.title === "App" ? "2px solid #d32f2f" : "none",
   }}
 >
               <div style={styles.cardIcon}>
                 <IconComponent size={24} color="white" />
               </div>
 <button
-  onClick={() => handleCardClick(card.route, card.external)}
+  onClick={() => {
+    if (card.title === "Upload") onUploadClick?.();
+    if (card.title === "App") onAppClick?.();
+  }}
   style={{
     ...styles.addBtn,
-    backgroundColor: card.title === "Campaign" ? "#d32f2f" : "white",
-    color: card.title === "Campaign" ? "#fff" : "#d32f2f",
+    backgroundColor: card.title === "App" ? "#d32f2f" : "white",
+    color: card.title === "App" ? "#fff" : "#d32f2f",
   }}
   onMouseEnter={(e) => {
     e.target.style.backgroundColor = '#d32f2f';
     e.target.style.color = '#fff';
   }}
   onMouseLeave={(e) => {
-    if (card.title !== "Campaign") { // keep Campaign selected
+    if (card.title !== "App") {
       e.target.style.backgroundColor = 'white';
       e.target.style.color = '#d32f2f';
     }
@@ -109,6 +97,7 @@ const cardData = [
   <span style={{ marginRight: '5px' }}>+</span>
   {card.title}
 </button>
+
             </div>
           );
         })}
