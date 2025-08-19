@@ -1,0 +1,11 @@
+/* Image container hover effect */
+.image-container:hover .image-overlay {
+  opacity: 1;
+}
+
+/* Image fit adjustment */
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

@@ -26,6 +26,8 @@ function TopBar({ onNewClick, showDropdown, children, search, setSearch }) {
           {children}
         </div>
       )}
+
+      
       <input
         placeholder="Search folders and files by name..."
         style={{ marginLeft: 30, padding: 8, borderRadius: 4, border: '1px solid #ccc', flex: 1, maxWidth: 350 }}

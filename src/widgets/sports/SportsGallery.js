@@ -1,13 +1,12 @@
 import React from "react";
 import { FaDatabase, FaGlobe } from "react-icons/fa"; 
-import './styles.css'
 
 
-function EntertainmentGallery({ cards, onWidgetSelect }) {
+function SportsGallery({ cards, onWidgetSelect }) {
   return (
     <div style={{ padding: '10px 20px', width: "100%", backgroundColor : '#ececec' }}>
       <div style={{color:'#135f87', alignItems:'center',textAlign:'center', fontSize: 28, fontWeight: "bold", marginBottom: 18 }}>
-        Entertainment
+        Other
       </div>
 
       <div
@@ -123,4 +122,4 @@ function EntertainmentGallery({ cards, onWidgetSelect }) {
   );
 }
 
-export default EntertainmentGallery;
+export default SportsGallery;

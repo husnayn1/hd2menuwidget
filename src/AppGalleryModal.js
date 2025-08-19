@@ -3,6 +3,13 @@ import { EntertainmentGallery } from "./widgets";
 import YouTubeVideoModal from './widgets/social-networks/YouTubeVideoModal.jsx';
 import FacebookModal from './widgets/social-networks/FacebookModal.jsx';
 import AnimatedFacebookModal from './widgets/social-networks/AnimatedFacebookModal.jsx';
+import { CiSearch } from "react-icons/ci";
+import { IoMdClose } from "react-icons/io";
+import OfficeGallery from "./widgets/office/OfficeGallery.js";
+import OtherGallery from "./widgets/other/OtherGallery.js";
+import SportsGallery from "./widgets/sports/SportsGallery.js";
+import TextScrollerGallery from "./widgets/text-scrollers/textScrollerGallery.js";
+
 
 const galleryData = [
   {
@@ -494,23 +501,66 @@ const galleryData = [
   },
   {
     category: "Office",
-    cards: [
-      {
-        name: "Office App",
-        description: "Office productivity tools.",
-        image: "https://via.placeholder.com/200x120?text=Office+App"
-      }
-    ]
+cards: [
+  {
+    name: "Office App",
+    description: "Office productivity tools.",
+    dataFeed: "Data Feed Enabled!",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL3l3DN3EfU5a4xM2zYyGsXBrOjdGVfGga2g&s"
+  },
+  {
+    name: "New Employee",
+    description: "Data Feed Enabled",
+    dataFeed: "Data Feed Enabled!",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCTVsK2OH5_yxY2hP3UzRIChqpcJKSr7RnkA&s"
+  },
+  {
+    name: "Our Team",
+    dataFeed: "Data Feed Enabled!",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX-oEnKBEvXjSpKmFYZhVEzomjt_WoFHC4yw&s"
+  },
+  {
+    name: "Success Cases",
+    dataFeed: "Data Feed Enabled!",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2h5_fdoT-tCHc0ne6tB_wzq0xvSkcMryxCQ&s"
+  },
+  {
+    name: "Testimonials",
+    dataFeed: "Data Feed Enabled!",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThlZxHmCbNHiCgjbrtSL0Tx2IbLBvl7Xa_fw&s"
+  },
+  {
+    name: "Wi-Fi Zone",
+    dataFeed: "Data Feed Enabled!",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuXM_RLvhPABJvVjduSiHlBIv9dBWsjfeEaA&s"
+  }
+]
+
   },
   {
     category: "Other",
-    cards: [
-      {
-        name: "Other App",
-        description: "Miscellaneous applications.",
-        image: "https://via.placeholder.com/200x120?text=Other+App"
-      }
-    ]
+cards: [
+  {
+    name: "Airport Flight Status",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxHuLyKGW9wIJdIpv9OHo3MlhCizJrnPhElw&s"
+  },
+  {
+    name: "Audio Announcement App",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQob8_1uCF1VZ0MPiuz06makVqX7dJlR28h9g&s"
+  },
+  {
+    name: "Flight Status",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQktMqnoGoT7Ettj-RzsbJetDUQDbT_L5ScTw&s"
+  },
+  {
+    name: "HDMI Input",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_tFfQmxyydrYOpvK21dOvVP50i8PiStQbWA&s"
+  },
+  {
+    name: "Weather + Exchange - Ticker",
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaNw4L8GknXoD-KfSohUIB7K91Mfr3ItNY8g&s"
+  }
+]
   },
   {
     category: "Social Networks",
@@ -560,34 +610,97 @@ const galleryData = [
       }
     ]
   },
-  {
-    category: "Sports",
-    cards: [
-      {
-        name: "Sports App",
-        description: "Sports updates and scores.",
-        image: "https://via.placeholder.com/200x120?text=Sports+App"
-      }
-    ]
-  },
-  {
-    category: "Text and Scrollers",
-    cards: [
-      {
-        name: "Text Scroller",
-        description: "Scrolling text display.",
-        image: "https://via.placeholder.com/200x120?text=Text+Scroller"
-      }
-    ]
-  },
+{
+  category: "Sports",
+  cards: [
+    {
+      name: "Match scores widget",
+      description: "Sports updates and scores.",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQya2Q8l1k3YVWNS8XOUPgt_uZYZnjWZKRJeQ&s"
+    },
+    {
+      name: "Match Scores Widget",
+      description: "Sports updates and scores.",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2SMgNA_kvaAMZG7pPKsguNGIWEuQjB5L1mw&s"
+    },
+    {
+      name: "Soccer league table",
+      description: "Sports updates and scores.",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP0-QHu-42wkyha38UwVsO4UEcD8e_fmF-pg&s"
+    },
+    {
+      name: "Soccer league table",
+      description: "Sports updates and scores.",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHIlRDaC05D4FOOgBVToHGyt419jBgv89opg&s"
+    },
+    {
+      name: "Soccer Scores",
+      description: "Sports updates and scores.",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqtjQ57tObyOiImHXReapPsc8SAVfcbzyxUQ&s"
+    },
+    {
+      name: "Soccer Tables",
+      description: "Sports updates and scores.",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsBGB7UEDwBFHWHZ7mbABJFGTSFVo7bbQPNg&s"
+    }
+  ]
+},
+{
+  category: "Text and Scrollers",
+  cards: [
+    {
+      name: "Message App",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr63tAT-NZcmTkoNF3Tp5P958FyH22c4FtXQ&s"
+    },
+    {
+      name: "QR Code",
+      image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAB9CAMAAAC7zMUWAAAABlBMVEX///8AAABVwtN+AAACS0lEQVR4nO3VQW7DMAwF0eb+l+4mBQSCn5LTppgY8zaJLclpOQt/fUmSdAuPwbr+872eqXtOn6vAIDAGgTEITBrQev/K9/p5+nt6MgiMQWAMAjO9qLvP+n09e+W5CgwCYxAYg8CcDq6uT2evPFeFQWAMAmMQmJPB7e7XGKfPVcMgMAaBMQhMGlAdaF2rA06fp7+nJ4PAGATGIDCPwc/6q5/TcxUYBMYgMAb5QFOk7rvezCAwBoExyD+qQ17vT2vd+Rol7XvH/3EbBoExCIxBYE4GX4d+sl73pnsqDAJjEBiDwFyJsa5NA+/CpN9RYRAYg8AYBCYNNu2pg+7OdWs6ZBAYg8AYBGYaavpcpWelKIbaMAiMQWAMApUGOO2tZ+r9tPaOv/92DAJjEBiDwOyGl+7V9e46ndHAIDAGgTEIRDe03Vo34HTeABcZBMYgMAaBqS/f3ct7vd69yH2pv8AgMAaBMQhYGuAU6jRCd14bBoExCIxBAKYhrusnAz4ZukE2DAJjEBiDgNUwXaBp73ReLzAIjEFgDAJQX8RTjEfQPavbY6ADBoExCIxBPszp4Ne16bxRfskgMAaBMcg/64abBtgNO+1JAQyyYRAYg8AYBCYN6GTINdx6vZ7t9iswCIxBYAwCkwY6DS7FSta9BtkwCIxBYAwCcxqkG3I6k9a756owCIxBYAwCczLcbk8ddH1ed53OaGEQGIPAGAQmDWg37DrcXcC//8tvyiAwBoExCMxjsK7XvXWtPm+9ruvv/68+mEFgDAJjEEmSdBPfFrAaga+xUnIAAAAASUVORK5CYII="
+    },
+    {
+      name: "Text Scroller",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyym-2AAIrx5IwO7TrrhlJcYWOEn57AaRpAQ&s"
+    },
+    {
+      name: "Text Ticker",
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMyynWIg_9qEjqCRTYkco0lcL7Jfo3o8eAWg&s"
+    }
+  ]
+},
   {
     category: "Third Party",
     cards: [
-      {
-        name: "Third Party App",
+            {
+        name: "GeckoBoard",
         description: "Third party integrations.",
-        image: "https://via.placeholder.com/200x120?text=Third+Party+App"
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcBf4aFMtsmMPHmTUR3OfW756n_AX8xWNjvg&s"
       }
+      ,
+       {
+        name: "Google Slides",
+        description: "Third party integrations.",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWuUKnv82KlXZWb6w_OTeWY9wTZxQwGUrUng&s"
+
+      },
+            {
+        name: "Klipfolio",
+        description: "Third party integrations.",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvuoX8Iw8dv__NozekDABIgzdRBRo7nKMDSw&s"
+
+      },
+            
+       {
+        name: "Screenfeed",
+        description: "Third party integrations.",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU7u91wI7bhxOCeIRqS_GIH1BkAIqhg0pKHA&s"
+
+      },
+            {
+        name: "Strea.ma",
+        description: "Third party integrations.",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAnachNEeiwg0BKFFt1UO5Mb06qWrovMIL9Q&s"
+        
+      }
+
     ]
   },
   {
@@ -707,6 +820,8 @@ function AppGalleryModal({ onClose, onWidgetSelect, selectedCategory, setSelecte
   const [showAnimatedFacebookModal, setShowAnimatedFacebookModal] = useState(false);
   const [animatedFacebookCard, setAnimatedFacebookCard] = useState(null);
 
+
+  console.log("selectedCategory",selectedCategory);
   // --- Add logic for random featured card ---
   const getRandomFeaturedCard = () => {
     const clockCat = galleryData.find(cat => cat.category === 'Clock');
@@ -767,7 +882,9 @@ function AppGalleryModal({ onClose, onWidgetSelect, selectedCategory, setSelecte
                 color: '#666',
                 fontSize: 14
               }}>
-                🔍
+
+<CiSearch />
+
               </span>
             </div>
           </div>
@@ -807,12 +924,39 @@ function AppGalleryModal({ onClose, onWidgetSelect, selectedCategory, setSelecte
               zIndex: 10
             }}
           >
-            ×
+
+<IoMdClose />
           </button>
           
           {selectedCategory === 'Entertainment' ? (
             <EntertainmentGallery cards={filteredCards} onWidgetSelect={onWidgetSelect} />
-          ) : (
+          ) 
+          :
+           selectedCategory === 'Office' ? (
+            <OfficeGallery cards={filteredCards} onWidgetSelect={onWidgetSelect} />
+          )
+          : 
+          selectedCategory === 'Sports' ? (
+            <SportsGallery cards={filteredCards} onWidgetSelect={onWidgetSelect} />
+          )
+          : 
+
+                    selectedCategory === 'Third Party' ? (
+            <SportsGallery cards={filteredCards} onWidgetSelect={onWidgetSelect} />
+          )
+          : 
+          selectedCategory === 'Text and Scrollers' ? (
+            <TextScrollerGallery cards={filteredCards} onWidgetSelect={onWidgetSelect} />
+          )
+          : 
+
+          
+           selectedCategory === 'Other' ? (
+            <OtherGallery cards={filteredCards} onWidgetSelect={onWidgetSelect} />
+          )
+          : 
+
+          (
             <>
               <div style={{ fontSize: 28, fontWeight: 'bold', marginBottom: 18 }}>{currentCategory.category}</div>
               <div style={{ 
