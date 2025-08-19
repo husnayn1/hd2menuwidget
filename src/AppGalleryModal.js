@@ -13,6 +13,11 @@ import WeatherGallery from "./widgets/weather/WeatherGallery.js";
 import WebMedia from "./widgets/web-media/Webmedia.js";
 import RetireMeida from "./widgets/retired-apps/RetiredMedia.js";
 import NewMedia from "./widgets/news-rss-feeds/NewsMedia.js";
+import FeaturedGallery from "./widgets/office/OfficeGallery.js";
+import ClockGallery from "./widgets/clock/ClockGallery.js";
+import FinanceGallery from "./widgets/finance/FinanceGallery.js";
+import MeetingGallery from "./widgets/meeting-calendar/MeetingGallery.js";
+import MenuBoardGallery from "./widgets/menu-boards-tables/MenuBoardGallery.js";
 
 
 const galleryData = [
@@ -320,49 +325,49 @@ const galleryData = [
       {
         name: "Birthday Announcement",
         description: "Display upcoming birthdays with data feed integration.",
-        image: "./images/meeting-calendar/birthday-announcement.svg",
+        image: "https://cdn.pixabay.com/photo/2016/08/16/09/53/international-conference-1597531_640.jpg",
         type: "meeting-calendar"
       },
       {
         name: "Calendar App",
         description: "Display upcoming events and schedules.",
-        image: "./images/meeting-calendar/calendar-app.svg",
+        image: "https://cdn.pixabay.com/photo/2018/03/10/12/00/teamwork-3213924_640.jpg",
         type: "meeting-calendar"
       },
       {
         name: "Events Calendar",
         description: "Show daily events and schedules in calendar format.",
-        image: "./images/meeting-calendar/calendar-app.svg",
+        image: "https://cdn.pixabay.com/photo/2018/03/10/12/00/teamwork-3213924_640.jpg",
         type: "meeting-calendar"
       },
       {
         name: "Happy Birthday",
         description: "Celebrate birthdays with customizable templates.",
-        image: "./images/meeting-calendar/happy-birthday.svg",
+        image: "https://cdn.pixabay.com/photo/2016/08/16/09/53/international-conference-1597531_640.jpg",
         type: "meeting-calendar"
       },
       {
         name: "Happy Birthday - Elegant",
         description: "Elegant birthday announcement with data feed.",
-        image: "./images/meeting-calendar/happy-birthday.svg",
+        image: "https://cdn.pixabay.com/photo/2016/08/16/09/53/international-conference-1597531_640.jpg",
         type: "meeting-calendar"
       },
       {
         name: "Happy Birthday - Enterprise",
         description: "Corporate-style birthday announcements.",
-        image: "./images/meeting-calendar/happy-birthday.svg",
+        image: "https://cdn.pixabay.com/photo/2016/08/16/09/53/international-conference-1597531_640.jpg",
         type: "meeting-calendar"
       },
       {
         name: "Meeting Room Calendar App",
         description: "Display meeting room availability and schedules.",
-        image: "./images/meeting-calendar/calendar-app.svg",
+        image: "https://cdn.pixabay.com/photo/2018/03/10/12/00/teamwork-3213924_640.jpg",
         type: "meeting-calendar"
       },
       {
         name: "Meeting Room Calendar Bar",
         description: "Compact view of meeting room status.",
-        image: "./images/meeting-calendar/calendar-app.svg",
+        image: "https://cdn.pixabay.com/photo/2016/08/16/09/53/international-conference-1597531_640.jpg",
         type: "meeting-calendar"
       }
     ]
@@ -373,49 +378,49 @@ const galleryData = [
       {
         name: "Cafeteria",
         description: "Digital cafeteria menu display with breakfast, lunch, and snack options.",
-        image: "https://via.placeholder.com/200x120?text=Cafeteria",
+        image: "https://cdn.pixabay.com/photo/2017/07/31/11/22/man-2557408_640.jpg",
         type: "menu-board"
       },
       {
         name: "Directory List",
         description: "Display room and class schedules in a directory format.",
-        image: "https://via.placeholder.com/200x120?text=Directory+List",
+        image: "https://cdn.pixabay.com/photo/2019/09/17/09/45/to-do-4483048_640.jpg",
         type: "menu-board"
       },
       {
         name: "Menu Board - Basic",
         description: "Simple menu board with pricing information.",
-        image: "https://via.placeholder.com/200x120?text=Menu+Board+Basic",
+        image: "https://cdn.pixabay.com/photo/2019/09/17/09/45/to-do-4483048_640.jpg",
         type: "menu-board"
       },
       {
         name: "Menu Board - Casual",
         description: "Casual dining menu with images and pricing.",
-        image: "https://via.placeholder.com/200x120?text=Menu+Board+Casual",
+        image: "https://cdn.pixabay.com/photo/2022/07/16/15/01/checklist-7325314_640.jpg",
         type: "menu-board"
       },
       {
         name: "Sales App - Modern",
         description: "Modern product display with pricing information.",
-        image: "https://via.placeholder.com/200x120?text=Sales+App+Modern",
+        image: "https://cdn.pixabay.com/photo/2018/02/14/23/38/shopping-cart-3154149_640.jpg",
         type: "menu-board"
       },
       {
         name: "Sales App - Simple",
         description: "Simple product display with pricing.",
-        image: "https://via.placeholder.com/200x120?text=Sales+App+Simple",
+        image: "https://cdn.pixabay.com/photo/2018/02/14/23/38/shopping-cart-3154149_640.jpg",
         type: "menu-board"
       },
       {
         name: "Sales Grid",
         description: "Grid layout for multiple product displays.",
-        image: "https://via.placeholder.com/200x120?text=Sales+Grid",
+        image: "https://cdn.pixabay.com/photo/2024/09/30/03/57/ai-generated-9084620_640.jpg",
         type: "menu-board"
       },
       {
         name: "Simple Table",
         description: "Basic table layout for displaying information.",
-        image: "https://via.placeholder.com/200x120?text=Simple+Table",
+        image: "https://cdn.pixabay.com/photo/2023/11/14/11/33/ai-generated-8387510_640.png",
         type: "menu-board"
       }
     ]
@@ -946,13 +951,33 @@ function AppGalleryModal({ onClose, onWidgetSelect, selectedCategory, setSelecte
 
 <IoMdClose />
           </button>
-          
-          {selectedCategory === 'Entertainment' ? (
+
+          {selectedCategory === 'Clock' ? (
+            <ClockGallery cards={filteredCards} onWidgetSelect={onWidgetSelect} />
+          ) 
+          :
+          selectedCategory === 'Finance' ? (
+            <FinanceGallery cards={filteredCards} onWidgetSelect={onWidgetSelect} />
+          ) 
+          :
+          selectedCategory === 'Menu Boards & Tables' ? (
+            <MenuBoardGallery cards={filteredCards} onWidgetSelect={onWidgetSelect} />
+          ) 
+          :
+          selectedCategory === 'Meeting Room & Calendar' ? (
+            <MeetingGallery cards={filteredCards} onWidgetSelect={onWidgetSelect} />
+          ) 
+          :
+          selectedCategory === 'Entertainment' ? (
             <EntertainmentGallery cards={filteredCards} onWidgetSelect={onWidgetSelect} />
           ) 
           :
            selectedCategory === 'Office' ? (
             <OfficeGallery cards={filteredCards} onWidgetSelect={onWidgetSelect} />
+          )
+          :
+           selectedCategory === 'Featured' ? (
+            <FeaturedGallery cards={filteredCards} onWidgetSelect={onWidgetSelect} />
           )
           : 
           selectedCategory === 'Sports' ? (
@@ -984,6 +1009,7 @@ function AppGalleryModal({ onClose, onWidgetSelect, selectedCategory, setSelecte
             <NewMedia cards={filteredCards} onWidgetSelect={onWidgetSelect} />
           )
           :
+
                  
            selectedCategory === 'Other' ? (
             <OtherGallery cards={filteredCards} onWidgetSelect={onWidgetSelect} />

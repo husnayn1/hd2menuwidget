@@ -2,11 +2,12 @@ import React from "react";
 import { FaDatabase, FaGlobe } from "react-icons/fa"; 
 
 
-function FeaturedGallery({ cards, onWidgetSelect }) {
+function MenuBoardGallery({ cards, onWidgetSelect }) {
   return (
     <div style={{ padding: '10px 20px', width: "100%", backgroundColor : '#ececec' }}>
       <div style={{color:'#135f87', alignItems:'center',textAlign:'center', fontSize: 28, fontWeight: "bold", marginBottom: 18 }}>
-        Office
+       Menu Boards & Tables
+
       </div>
 
       <div
@@ -122,4 +123,4 @@ function FeaturedGallery({ cards, onWidgetSelect }) {
   );
 }
 
-export default FeaturedGallery;
+export default MenuBoardGallery;
