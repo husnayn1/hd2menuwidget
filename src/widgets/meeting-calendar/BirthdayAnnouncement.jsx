@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Stage, Layer, Text, Rect, Group } from 'react-konva';
+import React, { useState, useEffect, useRef } from 'react';
 
 const BirthdayAnnouncement = ({ widget, settings = {} }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [upcomingBirthdays, setUpcomingBirthdays] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const iframeRef = useRef(null);
   
   // Extract data feed settings
   const {
@@ -111,93 +112,309 @@ END:VCALENDAR`;
 
   const {
     backgroundColor = '#ffffff',
-    fontColor = '#333333',
+    customBackgroundColor = '',
+    customBackgroundImage = '',
+    disableBackground = false,
+    titleFontColor = '#ffffff',
+    cardFontColor = '#333333',
     textFont = 'Arial',
-    highlightColor = '#1976d2',
-    showEachDataFor = 15,
-    transitionSpeed = 0.7,
+    duration = 10,
+    filteringOptions = 'Show this week\'s birthdays',
     disableAnimations = false,
-    // Additional birthday-specific options
-    headerFontSize = 24,
-    birthdayItemBackgroundColor = '#f8f9fa',
-    birthdayItemBorderColor = '#e9ecef',
-    birthdayItemCornerRadius = 8,
-    birthdayDateColor = '#1976d2',
-    birthdayDateFontSize = 18,
-    birthdayNameFontSize = 16
+    showCurrentMonth = false,
+    hideDates = false
   } = settings;
 
+  // Animation for cycling through birthdays
+  useEffect(() => {
+    if (!disableAnimations && upcomingBirthdays.length > 1) {
+      const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) => 
+          prevIndex === upcomingBirthdays.length - 1 ? 0 : prevIndex + 1
+        );
+      }, duration * 1000);
+      
+      return () => clearInterval(interval);
+    }
+  }, [upcomingBirthdays.length, duration, disableAnimations]);
+
+  // Generate HTML content for iframe
+  const generateIframeContent = () => {
+    const backgroundStyle = customBackgroundImage 
+      ? `background-image: url(${customBackgroundImage}); background-size: cover; background-position: center;`
+      : customBackgroundColor 
+        ? `background-color: ${customBackgroundColor};`
+        : 'background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);';
+
+    return `
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Birthday Announcement</title>
+        <style>
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+          
+          body {
+            font-family: ${textFont}, sans-serif;
+            ${backgroundStyle}
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            overflow: hidden;
+          }
+          
+          .container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: space-between;
+          }
+          
+          .title-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 2rem;
+          }
+          
+          .title {
+            color: ${titleFontColor};
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: bold;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+          }
+          
+          .birthday-cards {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding-right: 2rem;
+            max-height: 100%;
+            overflow: hidden;
+          }
+          
+          .birthday-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            transform: translateX(50px);
+            animation: slideIn 0.6s ease-out forwards;
+            transition: all 0.3s ease;
+          }
+          
+          .birthday-card:hover {
+            transform: scale(1.05);
+          }
+          
+          .birthday-card:nth-child(1) { animation-delay: 0.1s; }
+          .birthday-card:nth-child(2) { animation-delay: 0.3s; }
+          .birthday-card:nth-child(3) { animation-delay: 0.5s; }
+          
+          .date-circle {
+            width: clamp(40px, 8vw, 60px);
+            height: clamp(40px, 8vw, 60px);
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+          }
+          
+          .date-month {
+            font-size: clamp(0.6rem, 1.5vw, 0.8rem);
+            color: #666666;
+            font-weight: 500;
+            text-transform: uppercase;
+          }
+          
+          .date-day {
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            color: #333333;
+            font-weight: bold;
+            margin-top: -2px;
+          }
+          
+          .name {
+            color: ${titleFontColor};
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            flex: 1;
+          }
+          
+          @keyframes slideIn {
+            from {
+              opacity: 0;
+              transform: translateX(50px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+          
+          @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+          }
+          
+          .pulse {
+            animation: pulse 2s infinite;
+          }
+          
+          /* Responsive design */
+          @media (max-width: 768px) {
+            .container {
+              flex-direction: column;
+              gap: 1rem;
+            }
+            
+            .title-section {
+              padding-left: 1rem;
+              text-align: center;
+            }
+            
+            .birthday-cards {
+              padding-right: 1rem;
+              width: 100%;
+            }
+            
+            .birthday-card {
+              justify-content: center;
+            }
+          }
+          
+          @media (max-width: 480px) {
+            body {
+              padding: 10px;
+            }
+            
+            .birthday-cards {
+              gap: 0.5rem;
+            }
+            
+            .title {
+              font-size: 1.2rem;
+            }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="title-section">
+            <div class="title">
+              Birthday<br>Announcement
+            </div>
+          </div>
+          
+          <div class="birthday-cards">
+            ${upcomingBirthdays.slice(0, 3).map((birthday, index) => {
+              const [month, day] = birthday.date.split(' ');
+              return `
+                <div class="birthday-card ${index === currentIndex ? 'pulse' : ''}">
+                  <div class="date-circle">
+                    <div class="date-month">${month}</div>
+                    <div class="date-day">${day}</div>
+                  </div>
+                  <div class="name">${birthday.name}</div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+        
+        <script>
+          // Dynamic updates from parent component
+          let currentIndex = ${currentIndex};
+          const birthdays = ${JSON.stringify(upcomingBirthdays)};
+          const disableAnimations = ${disableAnimations};
+          const duration = ${duration};
+          
+          function updateHighlight() {
+            const cards = document.querySelectorAll('.birthday-card');
+            cards.forEach((card, index) => {
+              card.classList.toggle('pulse', index === currentIndex);
+            });
+          }
+          
+          // Listen for updates from parent
+          window.addEventListener('message', (event) => {
+            if (event.data.type === 'updateIndex') {
+              currentIndex = event.data.index;
+              updateHighlight();
+            }
+          });
+          
+          // Auto-cycle through birthdays if animations enabled
+          if (!disableAnimations && birthdays.length > 1) {
+            setInterval(() => {
+              currentIndex = (currentIndex + 1) % birthdays.length;
+              updateHighlight();
+              // Notify parent of index change
+              window.parent.postMessage({
+                type: 'indexChanged',
+                index: currentIndex
+              }, '*');
+            }, duration * 1000);
+          }
+        </script>
+      </body>
+      </html>
+    `;
+  };
+
+  // Update iframe content when data changes
+  useEffect(() => {
+    if (iframeRef.current) {
+      const iframe = iframeRef.current;
+      const doc = iframe.contentDocument || iframe.contentWindow.document;
+      doc.open();
+      doc.write(generateIframeContent());
+      doc.close();
+    }
+  }, [upcomingBirthdays, currentIndex, settings, titleFontColor, textFont, customBackgroundColor, customBackgroundImage, disableAnimations, duration]);
+
+  // Handle messages from iframe
+  useEffect(() => {
+    const handleMessage = (event) => {
+      if (event.data.type === 'indexChanged') {
+        setCurrentIndex(event.data.index);
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, []);
+
   return (
-    <Stage width={400} height={300}>
-      <Layer>
-        {/* Background */}
-        <Rect
-          x={0}
-          y={0}
-          width={400}
-          height={300}
-          fill={backgroundColor}
-          stroke="#e0e0e0"
-          strokeWidth={1}
-        />
-        
-        {/* Header */}
-        <Text
-          x={20}
-          y={20}
-          text="Upcoming Birthdays"
-          fontSize={headerFontSize}
-          fontFamily={textFont}
-          fill={highlightColor}
-          fontWeight="bold"
-        />
-        
-        {/* Birthday List */}
-        <Group>
-          {upcomingBirthdays.map((birthday, index) => (
-            <Group key={index}>
-              <Rect
-                x={20}
-                y={60 + (index * 60)}
-                width={360}
-                height={50}
-                fill={birthdayItemBackgroundColor}
-                stroke={birthdayItemBorderColor}
-                strokeWidth={1}
-                cornerRadius={birthdayItemCornerRadius}
-              />
-              <Text
-                x={40}
-                y={75 + (index * 60)}
-                text={birthday.date}
-                fontSize={birthdayDateFontSize}
-                fontFamily={textFont}
-                fill={birthdayDateColor}
-                fontWeight="bold"
-              />
-              <Text
-                x={120}
-                y={75 + (index * 60)}
-                text={birthday.name}
-                fontSize={birthdayNameFontSize}
-                fontFamily={textFont}
-                fill={fontColor}
-              />
-            </Group>
-          ))}
-        </Group>
-        
-        {/* Footer */}
-        <Text
-          x={20}
-          y={260}
-          text={`Last updated: ${currentTime.toLocaleTimeString()}`}
-          fontSize={12}
-          fontFamily={textFont}
-          fill="#666666"
-        />
-      </Layer>
-    </Stage>
+    <iframe
+      ref={iframeRef}
+      style={{
+        width: '100%',
+        height: '100%',
+        border: 'none',
+        borderRadius: '8px',
+        overflow: 'hidden'
+      }}
+      title="Birthday Announcement Widget"
+    />
   );
 };
 

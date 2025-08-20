@@ -122,7 +122,9 @@ function ContentArea({ media, onRenameMedia, onDeleteMedia, search, onEditWidget
       if (item) {
         // For static images and test widgets, just close the menu (they can't be permanently deleted)
         if (item.name === 'Lightning' || item.name === 'Clocks' || item.name === 'Clouds' || 
-            item.name === 'Analog Round Clock' || item.name === '7 days exchange rate') {
+            item.name === 'Analog Round Clock' || item.name === 'Analog Square Clock' || 
+            item.name === 'Digital Simple Clock' || item.name === 'Glow Clock' || 
+            item.name === '7 days exchange rate') {
           console.log(`Cannot delete static/test item: ${item.name}`);
           setMenu({ open: false, x: 0, y: 0, idx: null });
           return;
@@ -826,36 +828,77 @@ function ContentArea({ media, onRenameMedia, onDeleteMedia, search, onEditWidget
                       </div>
                     );
                   } else if (item.type === 'meeting-calendar' || item.name?.toLowerCase().includes('meeting room') || item.name?.toLowerCase().includes('calendar') || item.name?.toLowerCase().includes('birthday')) {
-                    // For meeting-calendar widgets, show a preview using the actual components or preview images
+                    // For meeting-calendar widgets, show actual component preview
                     const isBirthday = item.name?.toLowerCase().includes('birthday');
                     
-                    // Check if we have a preview image
-                    let previewImage = null;
-                    if (item.name?.toLowerCase().includes('birthday')) {
-                      previewImage = './images/meeting-calendar/birthday-announcement.svg';
-                    } else if (item.name?.toLowerCase().includes('happy birthday')) {
-                      previewImage = './images/meeting-calendar/happy-birthday.svg';
+                    if (isBirthday) {
+                      return (
+                        <div style={{
+                          width: 90,
+                          height: 90,
+                          marginBottom: 6,
+                          borderRadius: 4,
+                          border: '1px solid #eee',
+                          position: 'relative',
+                          overflow: 'hidden',
+                          transform: 'scale(0.22)',
+                          transformOrigin: 'top left'
+                        }}>
+                          <BirthdayAnnouncement
+                            widget={{
+                              ...item,
+                              birthdays: [
+                                { name: "John Smith", date: "Apr 10" },
+                                { name: "Emma Johnson", date: "Apr 11" },
+                                { name: "James Brown", date: "Apr 12" }
+                              ]
+                            }}
+                            settings={{
+                              duration: 10,
+                              filteringOptions: "Show this week's birthdays",
+                              textFont: "Arial",
+                              titleFontColor: "#ffffff",
+                              cardFontColor: "#333333",
+                              disableAnimations: true
+                            }}
+                          />
+                        </div>
+                      );
+                    } else if (item.name?.toLowerCase().includes('calendar')) {
+                      return (
+                        <div style={{
+                          width: 90,
+                          height: 90,
+                          marginBottom: 6,
+                          borderRadius: 4,
+                          border: '1px solid #eee',
+                          position: 'relative',
+                          overflow: 'hidden',
+                          transform: 'scale(0.22)',
+                          transformOrigin: 'top left'
+                        }}>
+                          <CalendarApp widget={item} />
+                        </div>
+                      );
                     } else {
-                      previewImage = './images/meeting-calendar/calendar-app.svg';
+                      return (
+                        <div style={{
+                          width: 90,
+                          height: 90,
+                          marginBottom: 6,
+                          borderRadius: 4,
+                          border: '1px solid #eee',
+                          position: 'relative',
+                          overflow: 'hidden',
+                          transform: 'scale(0.22)',
+                          transformOrigin: 'top left'
+                        }}>
+                          <MeetingAndCalendar widget={item} />
+                        </div>
+                      );
                     }
                     
-                    return (
-                      <div style={{
-                        width: 90,
-                        height: 90,
-                        marginBottom: 6,
-                        borderRadius: 4,
-                        border: '1px solid #eee',
-                        position: 'relative',
-                        overflow: 'hidden'
-                      }}>
-                        <img
-                          src={previewImage}
-                          alt={item.name}
-                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                        />
-                      </div>
-                    );
+                    return null;
                   } else if (item.type === 'social-network' || item.name?.toLowerCase().includes('facebook') || item.name?.toLowerCase().includes('youtube') || item.name?.toLowerCase().includes('follow us') || item.name?.toLowerCase().includes('tagbox') || item.name?.toLowerCase().includes('walls.io')) {
                     // For social network widgets, show a social media preview
                     const isFacebook = item.name?.toLowerCase().includes('facebook');

@@ -8,7 +8,7 @@ export { EntertainmentKonva, EntertainmentPreviewModal, EntertainmentGallery } f
 export { FinanceKonva, FinanceCustomizeModal } from './finance';
 
 // Meeting & Calendar widgets
-export { MeetingAndCalendar, meetingCalendar, BirthdayAnnouncement, CalendarApp, HappyBirthday } from './meeting-calendar';
+export { MeetingAndCalendar, meetingCalendar, BirthdayAnnouncement, BirthdayAnnouncementCustomizeModal, CalendarApp, HappyBirthday } from './meeting-calendar';
 
 // Weather widgets
 // export { WeatherWidget } from './weather';

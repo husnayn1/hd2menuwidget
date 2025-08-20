@@ -5,13 +5,14 @@ import TopBar from '../../TopBar';
 import NewDropdown from '../../NewDropdown';
 import ContentArea from '../../ContentArea';
 import AppGalleryModal from '../../AppGalleryModal';
-import { CustomizeClockModal } from '../clock';
+import WeatherCustomizeModal from '../../WeatherCustomizeModal';
+import FinanceCustomizeModal from '../../FinanceCustomizeModal';
+import CustomizeClockModal from '../../CustomizeClockModal';
+import BirthdayAnnouncementCustomizeModal from '../meeting-calendar/BirthdayAnnouncementCustomizeModal';
 import Players from './Players';
 import PlayersGroup from './PlayersGroup';
 import Reports from '../../Reports';
 import Home from '../../Home';
-import { FinanceCustomizeModal } from '../finance';
-import WeatherCustomizeModal from '../../WeatherCustomizeModal';
 import '../../App.css';
 
 function Konva() {
@@ -144,6 +145,8 @@ function Konva() {
               <FinanceCustomizeModal widget={customizingWidget} onClose={() => setCustomizingWidget(null)} onSave={handleSaveWidget} onBack={handleBackToGallery} />
             ) : customizingWidget.type === 'weather' || customizingWidget.name?.includes('Weather') ? (
               <WeatherCustomizeModal widget={customizingWidget} onClose={() => setCustomizingWidget(null)} onSave={handleSaveWidget} onBack={handleBackToGallery} />
+            ) : customizingWidget.title === 'Birthday Announcement' || customizingWidget.name === 'Birthday Announcement' ? (
+              <BirthdayAnnouncementCustomizeModal widget={customizingWidget} onClose={() => setCustomizingWidget(null)} onSave={handleSaveWidget} onBack={handleBackToGallery} />
             ) : (
               <CustomizeClockModal widget={customizingWidget} onClose={() => setCustomizingWidget(null)} onSave={handleSaveWidget} onBack={handleBackToGallery} />
             )
