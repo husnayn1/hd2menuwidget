@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { 
   FaCloudUploadAlt, 
   FaRocket, 
@@ -53,11 +54,12 @@ const cardData = [
 ];
 
 
-  const handleCardClick = (route, external = false) => {
-  };
+const [activeCard, setActiveCard] = useState(null); 
+
+
 
   return (
-    <div className="container-fluid py-1 mt-1">
+    <div className="container-fluid py-1 mt-1" style={{marginBottom:'10px'}}>
       <div style={styles.mediaCards}>
         {cardData.map((card, index) => {
           const IconComponent = card.icon;
@@ -66,8 +68,8 @@ const cardData = [
   key={index}
   style={{
     ...styles.mediaCard,
-    backgroundColor: card.title === "App" ? "#ffe6e6" : "white",
-    border: card.title === "App" ? "2px solid #d32f2f" : "none",
+    backgroundColor: activeCard === card.title ? "#ffe6e6" : "white",
+    border: activeCard === card.title ? "2px solid #d32f2f" : "none",
   }}
 >
               <div style={styles.cardIcon}>
@@ -75,26 +77,29 @@ const cardData = [
               </div>
 <button
   onClick={() => {
+    setActiveCard(card.title);   // 👈 active card set karo
     if (card.title === "Upload") onUploadClick?.();
     if (card.title === "App") onAppClick?.();
   }}
   style={{
     ...styles.addBtn,
-    backgroundColor: card.title === "App" ? "#d32f2f" : "white",
-    color: card.title === "App" ? "#fff" : "#d32f2f",
+    backgroundColor: activeCard === card.title ? "#d32f2f" : "white",
+    color: activeCard === card.title ? "#fff" : "#d32f2f",
   }}
   onMouseEnter={(e) => {
-    e.target.style.backgroundColor = '#d32f2f';
-    e.target.style.color = '#fff';
+    if (activeCard !== card.title) {   // 👈 active wale pe hover effect mat lagao
+      e.target.style.backgroundColor = "#d32f2f";
+      e.target.style.color = "#fff";
+    }
   }}
   onMouseLeave={(e) => {
-    if (card.title !== "App") {
-      e.target.style.backgroundColor = 'white';
-      e.target.style.color = '#d32f2f';
+    if (activeCard !== card.title) {
+      e.target.style.backgroundColor = "white";
+      e.target.style.color = "#d32f2f";
     }
   }}
 >
-  <span style={{ marginRight: '5px' }}>+</span>
+  <span style={{ marginRight: "5px" }}>+</span>
   {card.title}
 </button>
 
@@ -110,9 +115,9 @@ const styles = {
   mediaCards: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(125px, 1fr))',
-    gap: '10px',
+    gap: '8px',
     padding: '0px 0',
-    maxWidth: '1200px',
+    maxWidth: '1100px',
     margin: '0 auto'
   },
   mediaCard: {

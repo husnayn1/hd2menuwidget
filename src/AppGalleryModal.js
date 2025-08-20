@@ -878,7 +878,7 @@ function AppGalleryModal({ onClose, onWidgetSelect, selectedCategory, setSelecte
       position: "fixed", top: 0, left: 0, width: "100vw", height: "100vh",
       background: "rgba(0,0,0,0.3)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 100
     }}>
-      <div style={{ background: '#fff', borderRadius: 10, boxShadow: '0 4px 32px rgba(0,0,0,0.10)', display: 'flex', width: 900, minHeight: 600, maxWidth: '95vw', maxHeight: '90vh', overflow: 'hidden' }}>
+      <div style={{ background: '#ececec', borderRadius: 10, boxShadow: '0 4px 32px rgba(0,0,0,0.10)', display: 'flex', width: 900, minHeight: 600,  maxHeight: '90vh' }}>
         {/* Sidebar */}
         <div style={{ width: 220, borderRight: "1px solid #eee", padding: 20, overflowY: 'auto', background: '#f8f8f8' }}>
           {/* Search Bar */}
@@ -890,7 +890,7 @@ function AppGalleryModal({ onClose, onWidgetSelect, selectedCategory, setSelecte
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 style={{
-                  width: '100%',
+                  width: '70%',
                   padding: '8px 12px 8px 32px',
                   border: '1px solid #ddd',
                   borderRadius: 6,

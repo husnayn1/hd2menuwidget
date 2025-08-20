@@ -13,6 +13,7 @@ import Home from '../../Home';
 import { FinanceCustomizeModal } from '../finance';
 import WeatherCustomizeModal from '../../WeatherCustomizeModal';
 import '../../App.css';
+import MediaCards from "../../components/widget-box/MediaCard";
 
 function Konva() {
   // Persist media in localStorage
@@ -125,12 +126,14 @@ function Konva() {
           display: 'flex',
           flexDirection: 'column',
           minWidth: 0,
-          height: '100vh',
-          overflowY: 'auto'
+          // height: '100vh',
+          // overflowY: 'auto',
+          marginTop:'20px',
         }}>
-          <TopBar onNewClick={handleNewClick} showDropdown={showDropdown} search={search} setSearch={setSearch}>
+          {/* <TopBar onNewClick={handleNewClick} showDropdown={showDropdown} search={search} setSearch={setSearch}>
             <NewDropdown onAppClick={handleAppClick} onUploadClick={handleUploadClick} />
-          </TopBar>
+          </TopBar> */}
+            <MediaCards  onAppClick={handleAppClick} onUploadClick={handleUploadClick} />
           <Routes>
             <Route path="/content" element={<ContentArea media={media} onRenameMedia={handleRenameMedia} onDeleteMedia={handleDeleteMedia} search={search} onEditWidget={handleEditWidget} />} />
             <Route path="/players" element={<Players />} />

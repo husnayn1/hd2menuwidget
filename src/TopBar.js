@@ -66,7 +66,7 @@ function TopBar({ onNewClick, showDropdown, children, search, setSearch }) {
   )}
 
 
-  <MediaCards />
+  <MediaCards  />
 </div>
   );
 }

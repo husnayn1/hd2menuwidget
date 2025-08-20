@@ -217,7 +217,6 @@ function Konva() {
         }}>
           <TopBar onNewClick={handleNewClick} showDropdown={showDropdown} search={search} setSearch={setSearch}>
             <NewDropdown onAppClick={handleAppClick} onUploadClick={handleUploadClick} />
-
           </TopBar>
           <Routes>
             <Route path="/content" element={<ContentArea media={media} onRenameMedia={handleRenameMedia} onDeleteMedia={handleDeleteMedia} search={search} onEditWidget={handleEditWidget} />} />
@@ -244,7 +243,7 @@ function Konva() {
               <CustomizeSocialNetworkModal widget={customizingWidget} onClose={() => setCustomizingWidget(null)} onSave={handleSaveWidget} onBack={handleBackToGallery} />
             ) : (
               <CustomizeClockModal widget={customizingWidget} onClose={() => setCustomizingWidget(null)} onSave={handleSaveWidget} onBack={handleBackToGallery} />
-            )}
+            ))}
           <input
             type="file"
             accept="image/*"
