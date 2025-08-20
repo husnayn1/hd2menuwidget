@@ -74,7 +74,9 @@ function CustomizeCalendarModal({ widget, onClose, onSave, onBack }) {
     if (widget) {
       console.log("Loading calendar widget data:", widget);
       
-      setAppName(widget.appName || widget.name || "");
+      if (widget.appName) {
+        setAppName(widget.appName);
+      }
       setTags(widget.tags || "");
       setBackgroundColor(widget.backgroundColor || "#8B4513");
       setFontColor(widget.fontColor || "#ffffff");

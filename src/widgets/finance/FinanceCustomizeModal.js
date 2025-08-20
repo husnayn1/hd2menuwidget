@@ -75,7 +75,9 @@ function FinanceCustomizeModal({ widget, onClose, onSave, onBack }) {
     if (widget) {
       console.log("Loading finance widget data:", widget);
       
-      setAppName(widget.appName || widget.name || "");
+      if (widget.appName) {
+        setAppName(widget.appName);
+      }
       setTags(widget.tags || "");
       setBaseCurrency(widget.baseCurrency || "USD");
       setExchangeCurrency(widget.exchangeCurrency || "EUR");

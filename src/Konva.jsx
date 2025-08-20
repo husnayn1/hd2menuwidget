@@ -13,6 +13,7 @@ import Home from './Home';
 import FinanceCustomizeModal from './FinanceCustomizeModal';
 import WeatherCustomizeModal from './WeatherCustomizeModal';
 import { BirthdayAnnouncementCustomizeModal, CustomizeCalendarModal } from './widgets/meeting-calendar';
+import CalendarAppCustomizeModal from './widgets/meeting-calendar/CalendarAppCustomizeModal';
 import CustomizeSocialNetworkModal from './CustomizeSocialNetworkModal';
 import YouTubeVideoModal from './widgets/social-networks/YouTubeVideoModal.jsx';
 import FacebookModal from './widgets/social-networks/FacebookModal.jsx';
@@ -35,6 +36,11 @@ function Konva() {
     { url: lightningImg, name: 'Lightning', type: 'image' },
     { url: clocksImg, name: 'Clocks', type: 'image' },
     { url: cloudsImg, name: 'Clouds', type: 'image' },
+    // Clock widget static previews
+    { url: clocksImg, name: 'Analog Round Clock', type: 'widget', originalName: 'Analog Round Clock', widgetType: 'analog-round', dialType: 'arabic', dialBg: '#ffffff', handsColor: '#000000', bgColor: '#ffffff', appName: '', timeFormat: 'hh:mm:ss', ampm: true, textFont: 'Arial' },
+    { url: clocksImg, name: 'Analog Square Clock', type: 'widget', originalName: 'Analog Square Clock', widgetType: 'analog-square', dialType: 'arabic', dialBg: '#ffffff', handsColor: '#000000', bgColor: '#ffffff', appName: '', timeFormat: 'hh:mm:ss', ampm: true, textFont: 'Arial' },
+    { url: clocksImg, name: 'Digital Simple Clock', type: 'widget', originalName: 'Digital Simple Clock', widgetType: 'digital-simple', dialType: 'arabic', dialBg: '#ffffff', handsColor: '#000000', bgColor: '#ffffff', appName: '', timeFormat: 'hh:mm:ss', ampm: true, textFont: 'Arial' },
+    { url: clocksImg, name: 'Glow Clock', type: 'widget', originalName: 'Glow Clock', widgetType: 'glow-clock', dialType: 'arabic', dialBg: '#ffffff', handsColor: '#000000', bgColor: '#ffffff', appName: '', timeFormat: 'hh:mm:ss', ampm: true, textFont: 'Arial' },
   ];
   
   console.log('Konva - staticImages:', staticImages);
@@ -126,6 +132,8 @@ function Konva() {
         ...widget,
         type: 'widget', // Set as widget type for ContentArea to handle preview
         originalName: widget.name,
+        name: '', // Empty name so user can enter custom name
+        appName: '', // Empty appName so user can enter custom name
         // Set default clock properties
         dialType: 'arabic',
         dialBg: '#ffffff',
@@ -162,7 +170,9 @@ function Konva() {
         updated[existingIndex] = { 
           ...widget, 
           type: widget.type || 'widget',
-          originalName: widget.originalName || widget.name // Preserve original name
+          originalName: widget.originalName || widget.name, // Preserve original name
+          name: widget.name || '', // Preserve empty name for custom input
+          appName: widget.appName || '' // Preserve empty appName for custom input
         };
         return updated;
       } else {
@@ -170,7 +180,9 @@ function Konva() {
         return [...prev, { 
           ...widget, 
           type: widget.type || 'widget',
-          originalName: widget.name // Store original name for future reference
+          originalName: widget.originalName || widget.name, // Store original name for future reference
+          name: widget.name || '', // Preserve empty name for custom input
+          appName: widget.appName || '' // Preserve empty appName for custom input
         }];
       }
     });
@@ -233,6 +245,8 @@ function Konva() {
               <FinanceCustomizeModal widget={customizingWidget} onClose={() => setCustomizingWidget(null)} onSave={handleSaveWidget} onBack={handleBackToGallery} />
             ) : customizingWidget.type === 'meeting-calendar' && customizingWidget.name?.toLowerCase().includes('birthday') ? (
               <BirthdayAnnouncementCustomizeModal widget={customizingWidget} onClose={() => setCustomizingWidget(null)} onSave={handleSaveWidget} onBack={handleBackToGallery} />
+            ) : customizingWidget.type === 'meeting-calendar' && customizingWidget.name?.toLowerCase().includes('calendar app') ? (
+              <CalendarAppCustomizeModal widget={customizingWidget} onClose={() => setCustomizingWidget(null)} onSave={handleSaveWidget} onBack={handleBackToGallery} />
             ) : customizingWidget.type === 'meeting-calendar' || (customizingWidget.widgetType === 'calendar' || customizingWidget.name?.toLowerCase().includes('calendar')) ? (
               <CustomizeCalendarModal widget={customizingWidget} onClose={() => setCustomizingWidget(null)} onSave={handleSaveWidget} onBack={handleBackToGallery} />
             ) : customizingWidget.widgetSubType === 'facebook-page' ? (

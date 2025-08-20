@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Stage, Layer, Text, Rect, Group, Circle } from 'react-konva';
+import React, { useState, useEffect, useRef } from 'react';
 
 const CalendarApp = ({ widget, settings = {} }) => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [calendarEvents, setCalendarEvents] = useState([]);
   const [currentView, setCurrentView] = useState('day'); // 'day', 'week', 'month
   const [viewPeriod, setViewPeriod] = useState(0); // For cycling through periods
-  
+  const iframeRef = useRef(null);
+
   // Extract all settings
   const {
     // Basic appearance settings
@@ -206,118 +206,240 @@ END:VCALENDAR`;
     }
   };
 
-  // Calculate stage dimensions based on orientation
-  const isPortrait = false; // This would be determined by settings in a real implementation
-  const stageWidth = isPortrait ? 300 : 400;
-  const stageHeight = isPortrait ? 400 : 300;
+  // Generate HTML content for iframe
+  const generateIframeContent = () => {
+    const backgroundStyle = backgroundImage 
+      ? `background-image: url(${backgroundImage}); background-size: cover; background-position: center;`
+      : `background-color: ${backgroundColor};`;
+
+    return `
+      <!DOCTYPE html>
+      <html lang="${language}">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calendar App</title>
+        <style>
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+          
+          body {
+            font-family: ${textFont}, sans-serif;
+            ${backgroundStyle}
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            overflow: hidden;
+            color: ${fontColor};
+          }
+          
+          .calendar-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border-radius: 12px;
+            background: linear-gradient(135deg, ${backgroundColor}dd, ${backgroundColor}aa);
+            backdrop-filter: blur(10px);
+            border: 2px solid ${eventBorderColor};
+            overflow: hidden;
+          }
+          
+          .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: linear-gradient(90deg, ${backgroundColor}, ${eventBackgroundColor});
+            border-bottom: 2px solid ${eventBorderColor};
+          }
+          
+          .header-text {
+            color: ${highlightColor};
+            font-size: clamp(16px, 4vw, ${headerFontSize}px);
+            font-weight: bold;
+            text-shadow: ${textShadow ? '2px 2px 4px rgba(0,0,0,0.3)' : 'none'};
+          }
+          
+          .calendar-icon {
+            width: clamp(30px, 6vw, 40px);
+            height: clamp(30px, 6vw, 40px);
+            background: ${highlightColor};
+            border-radius: 8px;
+            display: ${showIcon ? 'flex' : 'none'};
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(16px, 3vw, 20px);
+            color: ${backgroundColor};
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+          }
+          
+          .events-container {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+          }
+          
+          .event-card {
+            background: ${eventBackgroundColor};
+            border: 2px solid ${eventBorderColor};
+            border-radius: ${eventCornerRadius}px;
+            padding: 12px 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideIn 0.6s ease-out forwards;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+          }
+          
+          .event-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+          }
+          
+          .event-card:nth-child(1) { animation-delay: 0.1s; }
+          .event-card:nth-child(2) { animation-delay: 0.2s; }
+          .event-card:nth-child(3) { animation-delay: 0.3s; }
+          .event-card:nth-child(4) { animation-delay: 0.4s; }
+          .event-card:nth-child(5) { animation-delay: 0.5s; }
+          
+          .event-title {
+            color: ${eventTitleColor};
+            font-size: clamp(14px, 3vw, ${eventTitleFontSize}px);
+            font-weight: bold;
+            text-shadow: ${textShadow ? '1px 1px 2px rgba(0,0,0,0.3)' : 'none'};
+          }
+          
+          .event-time {
+            color: ${eventTimeColor};
+            font-size: clamp(12px, 2.5vw, ${eventTimeFontSize}px);
+            opacity: 0.9;
+            display: ${showTime ? 'block' : 'none'};
+          }
+          
+          @keyframes slideIn {
+            from {
+              opacity: 0;
+              transform: translateY(20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+          
+          .no-events {
+            text-align: center;
+            color: ${fontColor};
+            opacity: 0.7;
+            font-style: italic;
+            padding: 40px 20px;
+          }
+          
+          /* Responsive design */
+          @media (max-width: 768px) {
+            .header {
+              padding: 10px 15px;
+            }
+            
+            .events-container {
+              padding: 10px;
+              gap: 8px;
+            }
+            
+            .event-card {
+              padding: 10px 12px;
+            }
+          }
+          
+          @media (max-width: 480px) {
+            body {
+              padding: 10px;
+            }
+            
+            .header {
+              flex-direction: column;
+              gap: 8px;
+              text-align: center;
+            }
+          }
+        </style>
+      </head>
+      <body>
+        <div class="calendar-container">
+          <div class="header">
+            <div class="header-text">${getHeaderText()}</div>
+            <div class="calendar-icon">📅</div>
+          </div>
+          
+          <div class="events-container">
+            ${events.length > 0 ? events.map((event, index) => `
+              <div class="event-card">
+                <div class="event-title">${event.title}</div>
+                ${event.time ? `<div class="event-time">${event.time}</div>` : ''}
+              </div>
+            `).join('') : '<div class="no-events">No events scheduled</div>'}
+          </div>
+        </div>
+        
+        <script>
+          // Auto-refresh calendar data
+          const syncFrequency = ${syncFrequency};
+          const cyclingInterval = ${cyclingTimeInterval};
+          
+          // Simulate data refresh
+          if (syncFrequency > 0) {
+            setInterval(() => {
+              console.log('Refreshing calendar data...');
+            }, syncFrequency * 60 * 1000);
+          }
+          
+          // Handle period cycling
+          if (${showEventsInPeriods} && cyclingInterval > 0) {
+            setInterval(() => {
+              console.log('Cycling through periods...');
+            }, cyclingInterval * 1000);
+          }
+        </script>
+      </body>
+      </html>
+    `;
+  };
+
+  // Update iframe content when data changes
+  useEffect(() => {
+    if (iframeRef.current) {
+      const iframe = iframeRef.current;
+      const doc = iframe.contentDocument || iframe.contentWindow.document;
+      doc.open();
+      doc.write(generateIframeContent());
+      doc.close();
+    }
+  }, [calendarEvents, settings, currentTime]);
 
   return (
-    <Stage width={stageWidth} height={stageHeight}>
-      <Layer>
-        {/* Background */}
-        <Rect
-          x={0}
-          y={0}
-          width={stageWidth}
-          height={stageHeight}
-          fill={backgroundColor}
-          stroke="#654321"
-          strokeWidth={2}
-          cornerRadius={10}
-        />
-        
-        {/* Background Image (if provided) */}
-        {backgroundImage && (
-          <Rect
-            x={0}
-            y={0}
-            width={stageWidth}
-            height={stageHeight}
-            fillPatternImage={backgroundImage}
-          />
-        )}
-        
-        {/* Header */}
-        <Text
-          x={20}
-          y={20}
-          text={getHeaderText()}
-          fontSize={headerFontSize}
-          fontFamily={textFont}
-          fill={highlightColor}
-          fontWeight="bold"
-          shadowBlur={textShadow ? 2 : 0}
-        />
-        
-        {/* Calendar Icon */}
-        {showIcon && (
-          <>
-            <Circle
-              x={stageWidth - 50}
-              y={40}
-              radius={20}
-              fill={highlightColor}
-              stroke="#654321"
-              strokeWidth={2}
-            />
-            <Text
-              x={stageWidth - 60}
-              y={30}
-              text="📅"
-              fontSize={20}
-              fontFamily={textFont}
-            />
-          </>
-        )}
-        
-        {/* Events List */}
-        <Group>
-          {events.map((event, index) => (
-            <Group key={index}>
-              <Rect
-                x={20}
-                y={80 + (index * 60)}
-                width={stageWidth - 40}
-                height={50}
-                fill={eventBackgroundColor}
-                stroke={eventBorderColor}
-                strokeWidth={1}
-                cornerRadius={eventCornerRadius}
-              />
-              <Text
-                x={40}
-                y={95 + (index * 60)}
-                text={event.title}
-                fontSize={eventTitleFontSize}
-                fontFamily={textFont}
-                fill={eventTitleColor}
-                fontWeight="bold"
-              />
-              {showTime && (
-                <Text
-                  x={40}
-                  y={115 + (index * 60)}
-                  text={event.time}
-                  fontSize={eventTimeFontSize}
-                  fontFamily={textFont}
-                  fill={eventTimeColor}
-                />
-              )}
-            </Group>
-          ))}
-        </Group>
-        
-        {/* Current Time */}
-        <Text
-          x={20}
-          y={stageHeight - 40}
-          text={`Current Time: ${currentTime.toLocaleTimeString(language)}`}
-          fontSize={14}
-          fontFamily={textFont}
-          fill={highlightColor}
-        />
-      </Layer>
-    </Stage>
+    <iframe
+      ref={iframeRef}
+      style={{
+        width: '100%',
+        height: '100%',
+        border: 'none',
+        borderRadius: '8px',
+        overflow: 'hidden'
+      }}
+      title="Calendar App Widget"
+    />
   );
 };
 

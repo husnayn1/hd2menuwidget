@@ -177,12 +177,10 @@ function CustomizeClockModal({ widget, onClose, onSave, onBack }) {
       console.log("Widget appName:", widget.appName); // Debug appName specifically
       console.log("Widget name:", widget.name); // Debug name specifically
       
-      // For editing existing widgets, only use appName if it was previously set by user
-      // Don't auto-fill with widget.name - let user enter custom name
-      const currentAppName = widget.appName || "";
-      console.log("Setting appName to:", currentAppName); // Debug what we're setting
-      
-      setAppName(currentAppName);
+      // Only set appName if widget has a previously saved custom appName
+      if (widget.appName) {
+        setAppName(widget.appName);
+      }
       setTags(widget.tags || "");
       setDataFeed(widget.dataFeed || "");
       setDialType(widget.dialType || "arabic");
@@ -204,7 +202,7 @@ function CustomizeClockModal({ widget, onClose, onSave, onBack }) {
       setBackgroundColor(widget.backgroundColor || "#ffffff");
       setSelectedLanguage(widget.selectedLanguage || "en");
       setAppLabels(widget.appLabels || {
-        appTitle: widget.name || "Entertainment App",
+        appTitle: "",
         noDataAvailable: "No Data Available",
         checkConnection: "Check internet connection/Data Feed",
         photoBy: "Photo by:"
@@ -834,6 +832,7 @@ function CustomizeClockModal({ widget, onClose, onSave, onBack }) {
                       <input 
                         value={appLabels.appTitle} 
                         onChange={e => handleAppLabelChange('appTitle', e.target.value)} 
+                        placeholder="Enter app title"
                         style={{ width: '100%', padding: 6, borderRadius: 4, border: '1px solid #ccc', fontSize: 14 }} 
                       />
                     </div>
